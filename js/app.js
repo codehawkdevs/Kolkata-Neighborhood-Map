@@ -109,7 +109,7 @@ function getWikiData(location) {
         dataType: "jsonp",
         success: function(response) {
             let articleList = response[1];
-            let url = "http://en.wikipedia.org/wiki/" + articleList[0];
+            let url = "https://en.wikipedia.org/wiki/" + articleList[0];
             location.url = url;
             location.extract = response[2];
 
@@ -232,7 +232,7 @@ $(window).on("load", function() {
 
     $.getJSON(apiEndpoint, function(data){
         let icon = data.weather[0].icon;
-        let img = "<img src='http://openweathermap.org/img/w/" + icon + ".png' class='img-responsive pull-left'>";
+        let img = "<img src='https://openweathermap.org/img/w/" + icon + ".png' class='img-responsive pull-left'>";
         $(".temperature").append(img, data.main.temp-273.15 + "&#176;C | " + data.weather[0].main);
     });
 
