@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+      <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+      <title>Kolkata Neighbourhoods</title>
+      <link rel='shortcut icon' type='image/x-icon' href='img/icons8-binoculars-48.png'>
+      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <link rel="stylesheet" href="css/bootstrap.min.modal.css">
+      <link rel="stylesheet" href="css/main.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic+SC|Montserrat|Roboto">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+   </head>
+   <body>
+       <!-- Main section -->
+       <section class="container-fluid">
+           <div class="row">
+                <div class="col-md-3 left-box">
+                    <h1>Kolkata Neighbourhoods</h1>
+                    <img src="img/icons8-binoculars-48.png" class="img-responsive center-block">
+                    <div class="temperature"></div>
+                    <div>
+                        <input data-bind="textInput: inputLocation" placeholder="Search" style="width: 100%">
+                    </div>
+                    <ul data-bind= "foreach: locationItem" class="list-group">
+                        <li data-bind="text: name, click: $parent.wikiInfo" class="list-group-item"></li>
+                    </ul>
+                </div>
+            <div class="container-map">
+                <div id="map" class="map col-md-9"></div>
+            </div>
+        </section>
+        <!-- Main section ends -->
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel" style="font-family: 'Roboto', sans-serif;">Welcome to Kolkata Neighborhoods!</h4>
+                    </div>
+                    <div class="modal-body">
+                        <!--Photo credits: https://www.letsenrol.com/blog/uncategorized/top-10-b-com-colleges-kolkata/ -->
+                        <img src="img/kolkata.jpg" class="img-responsive" alt="Kolkata">
+
+                        <!-- Source: https://www.oyorooms.com/blog/kolkata-travel-guide/ -->
+                        <p style="font-family: 'Roboto', sans-serif;">Kolkata, the ‘Cultural Capital of India’ is the most unique metropolis of the country. Vibrant and ideal, modern yet traditional, Kolkata intriguingly juxtaposes itself and the Hooghly River slowly ebbs and flows to match its rhythm to the city.</p>
+                        <p>Kolkata is where the rich Indian culture manifests itself wholly. Its traditional heritage fuses seamlessly with the remnants of its colonial past, adding a nostalgic charm to the city. This idiosyncrasy of Kolkata coupled with ancient landmarks, museums, shopping streets and delectable cuisine has a magnetic pull over travel enthusiasts who visit the city to experience its vibrant culture. </p>
+                    </div>
+                    <div class="modal-footer center-block">
+                      <button type="button" class="btn btn-primary" data-dismiss="modal" style="font-family: 'Roboto', sans-serif;">Let's Explore!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal ends -->
+
+      <!-- Load scripts -->
+      <script src="js/knockout-3.4.2.js"></script>
+      <script src="js/jquery-3.3.1.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2zmLZ1PDcqI-NcB-ayhvOzBtz1gCUslI&callback=initMap" async defer></script>
+      <script src="js/model.js"></script>
+      <script src="js/app.js"></script>
+    </body>
+</html>
