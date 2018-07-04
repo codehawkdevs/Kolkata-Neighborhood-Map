@@ -9,6 +9,10 @@ This Web application is a part of Udacity's Full Stack Web Developer II Nanodegr
 - It is a single-page application, meaning it does not refresh the page for each new request made.
 - Uses the Wikipedia API to fetch and show information about the places.
 
+## Demo
+
+A working demo of this application can be found over [here](https://sdey96.github.io/Kolkata-Neighborhood-Map/).
+
 ## Source Tree
 
 ```
@@ -33,10 +37,6 @@ This Web application is a part of Udacity's Full Stack Web Developer II Nanodegr
 
 In this project, models are put in the file `model.js` located inside the `js` directory. The file `app.js` contains the app logic.
 
-## Demo
-
-A working demo of this application can be found over [here](https://sdey96.github.io/Kolkata-Neighborhood-Map/).
-
 ## Libraries Used
 
 - [Knockout.js](http://knockoutjs.com/)
@@ -50,4 +50,4 @@ A working demo of this application can be found over [here](https://sdey96.githu
 
 ## License
 
-This project is licensed under the MIT license found in the LICENSE file in the root directory of this source tree.
+This project is licensed under the MIT license found in the LICENSE file in the root directory of this project.
