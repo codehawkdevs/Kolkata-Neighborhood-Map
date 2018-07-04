@@ -16,7 +16,8 @@ window.addEventListener("load", () => {
         let icon = data.weather[0].icon;
         let img = `<img src='https://openweathermap.org/img/w/${icon}.png' class='img-responsive pull-left'>`;
         $(".temperature").append(img, data.main.temp-273.15 + "&#176;C | " + data.weather[0].main);
-    });
+    })
+    .fail(() => alert("Cannot fetch data from the servers. Please try again later."));
 
     // Load the modal when the page loads.
     $("#welcome-modal").modal("show");
@@ -28,9 +29,7 @@ window.addEventListener("load", () => {
  * Course link: https://in.udacity.com/course/intro-to-ajax--ud110
  */
 function getWikiData(location) {
-    let wikiRequestTimeOut = setTimeout(() => {
-        window.alert("Something went wrong. Please try again later.");
-    }, 8000);
+    let wikiRequestTimeOut = setTimeout(() => alert("Something went wrong. Please try again later."), 8000);
 
     let wikiUrl = `https://en.wikipedia.org/w/api.php?action=opensearch&search=${location.wikiArticle}&format=json&callback=wikiCallback`;
 
@@ -197,16 +196,23 @@ let viewModel = function() {
             /* In the following statements, `location.url` and `location.extract` are extracted from the function `getWikiData()`.
              * They are essentially being used to get the URL and the first paragraph of the article, respectively.
              */
-            infoWindowHead = `<div>
-                                <h1><a target='_blank' href='${location.url}'>${marker.title}</a></h1>
-                             </div>`;
-            infoWindowBody = `<div>
-                                <img src='${imageData}' class='img-responsive' style='width: 100%; height: 270px;'><p>${location.extract[0]}</p>`;
-            infoWindowFooter = `<hr><p>Brought to you by <img src='https://png.icons8.com/windows/15/000000/wikipedia.png'> Wikipedia. Explore more on <a target='_blank' href='https://www.google.com/search?q=${marker.title}'>Google</a>.
-                             </div>`;
+            infoWindowContent = `<div>
+                                  <h1><a target='_blank' href='${location.url}'>${marker.title}</a></h1>
+                                </div>
+
+                                <div>
+                                   <img src='${imageData}' class='img-responsive' style='width: 100%; height: 270px;'>
+                                   <p>${location.extract[0]}</p>
+                                   <hr>
+                                   <p>
+                                      Brought to you by
+                                      <img src='https://png.icons8.com/windows/15/000000/wikipedia.png'> Wikipedia.
+                                      Explore more on <a target='_blank' href='https://www.google.com/search?q=${marker.title}'>Google</a>.
+                                   </p>
+                                </div>`;
 
             // Set content in the infowindow.
-            infoWindow.setContent(infoWindowHead + infoWindowBody + infoWindowFooter);
+            infoWindow.setContent(infoWindowContent);
 
             // Open the infowindow on the specified marker.
             infoWindow.open(map, marker);
