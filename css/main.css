@@ -22,9 +22,6 @@ h1 {
     width: 100%;
     margin: 0;
 }
-.map {
-    height: 100%;
-}
 .container-map {
     background-color: hsl(76, 89%, 52%);
     height: 100vh;
@@ -32,7 +29,10 @@ h1 {
     position: relative;
     z-index: 0;
 }
-.left-box {
+.map {
+    height: 100%;
+}
+.nav-section {
     background-color: hsl(76, 89%, 52%);
     z-index: 2;
 }
@@ -84,7 +84,6 @@ li {
 .modal {
     text-align: center;
 }
-
 @media screen and (min-width: 768px) {
     .modal:before {
         display: inline-block;
@@ -93,7 +92,6 @@ li {
         height: 100%;
     }
 }
-
 .modal-dialog {
     display: inline-block;
     text-align: left;
