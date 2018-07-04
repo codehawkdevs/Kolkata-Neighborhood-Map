@@ -29,7 +29,7 @@ window.addEventListener("load", () => {
  * Course link: https://in.udacity.com/course/intro-to-ajax--ud110
  */
 function getWikiData(location) {
-    let wikiRequestTimeOut = setTimeout(() => alert("Cannot fetch data from Wikipedia; please try again later."), 8000);
+    let wikiRequestTimeOut = setTimeout(() => alert("Cannot fetch data from Wikipedia at the moment. Please try again later."), 8000);
 
     let wikiUrl = `https://en.wikipedia.org/w/api.php?action=opensearch&search=${location.wikiArticle}&format=json&callback=wikiCallback`;
 
@@ -41,7 +41,6 @@ function getWikiData(location) {
             let url = `https://en.wikipedia.org/wiki/${articleList[0]}`;
             location.url = url;
             location.extract = response[2];
-
             clearTimeout(wikiRequestTimeOut);
         }
     });
@@ -214,7 +213,7 @@ let viewModel = function() {
                             Brought to you by
                             <img src='https://png.icons8.com/windows/15/000000/wikipedia.png'> Wikipedia.
                             Explore more on <a target='_blank' href='https://www.google.com/search?q=${marker.title}'>Google</a>.
-                            </p>
+                        </p>
                     </div>`);
 
             // Open the infowindow on the specified marker.
@@ -223,7 +222,7 @@ let viewModel = function() {
     };
 
 
-    // Open the infowindow when a specific location from the list  is clicked.
+    // Open the infowindow when a specific location from the list is clicked.
     this.wikiInfo = (location) => {
 
         // Render information received from Wikipedia on the infowindow.
@@ -244,12 +243,12 @@ let viewModel = function() {
 
         return ko.utils.arrayFilter(this.locations(), (location) => {
 
-            // If the location is found, then show it.
+            // If the location is found, then show it in the list.
             if (location.name.toLowerCase().indexOf(text) !== -1) {
                 location.marker.setVisible(true);
                 return true;
             }
-            // If the location isn't found, then hide it.
+            // If the location isn't found, then hide it from the list.
             else {
                 location.marker.setVisible(false);
                 return false;
