@@ -23,6 +23,32 @@ window.addEventListener("load", () => {
 });
 
 
+/* Get Wikipedia article from the Wikipedia API and do error handling.
+ * Part of this code has been brought from Udacity's "Intro to AJAX" course.
+ * Course link: https://in.udacity.com/course/intro-to-ajax--ud110
+ */
+function getWikiData(location) {
+    let wikiRequestTimeOut = setTimeout(() => {
+        window.alert("Something went wrong. Please try again later.");
+    }, 8000);
+
+    let wikiUrl = `https://en.wikipedia.org/w/api.php?action=opensearch&search=${location.wikiArticle}&format=json&callback=wikiCallback`;
+
+    $.ajax({
+        url: wikiUrl,
+        dataType: "jsonp",
+        success: (response) => {
+            let articleList = response[1];
+            let url = `https://en.wikipedia.org/wiki/${articleList[0]}`;
+            location.url = url;
+            location.extract = response[2];
+
+            clearTimeout(wikiRequestTimeOut);
+        }
+    });
+}
+
+
 let map;
 
 /* Initialize the map with custom styles.
@@ -108,32 +134,6 @@ function initMap() {
 
     // Apply bindings to the ViewModel.
     ko.applyBindings(new viewModel());
-}
-
-
-/* Get Wikipedia article from the Wikipedia API and do error handling.
- * Part of this code has been brought from Udacity's "Intro to AJAX" course.
- * Course link: https://in.udacity.com/course/intro-to-ajax--ud110
- */
-function getWikiData(location) {
-    let wikiRequestTimeOut = setTimeout(() => {
-        window.alert("Something went wrong. Please try again later.");
-    }, 8000);
-
-    let wikiUrl = `https://en.wikipedia.org/w/api.php?action=opensearch&search=${location.wikiArticle}&format=json&callback=wikiCallback`;
-
-    $.ajax({
-        url: wikiUrl,
-        dataType: "jsonp",
-        success: (response) => {
-            let articleList = response[1];
-            let url = `https://en.wikipedia.org/wiki/${articleList[0]}`;
-            location.url = url;
-            location.extract = response[2];
-
-            clearTimeout(wikiRequestTimeOut);
-        }
-    });
 }
 
 
