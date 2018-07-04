@@ -8,6 +8,7 @@ This Web application is a part of Udacity's Full Stack Web Developer II Nanodegr
 - Shows a list of popular places in Kolkata.
 - It is a single-page application, meaning it does not refresh the page for each new request made.
 - Uses the Wikipedia API to fetch and show information about the places.
+- Shows realtime weather of Kolkata.
 
 ## Demo
 
@@ -35,7 +36,11 @@ A working demo of this application can be found over [here](https://sdey96.githu
 └── README.md
 ```
 
-In this project, models are put in the file `model.js` located inside the `js` directory. The file `app.js` contains the app logic.
+In this project, the models are put in the file `model.js` located inside the `js` directory, and the file `app.js` contains the ViewModel.
+
+## How to run this application?
+
+Just open the file `index.html` and you are good to go.
 
 ## Libraries Used
 
