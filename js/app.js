@@ -131,19 +131,19 @@ let viewModel = function() {
 
     for (let location of self.locations()) {
 
-        // Get Wikipedia data for the concerned location.
+        // Get Wikipedia data for the current location.
         getWikiData(location);
 
         // Position the markers.
         let marker = new google.maps.Marker({
             map: map,
+            title: location.name,
+            icon: location.icon,
+            animation: google.maps.Animation.DROP,
             position: {
                 lat: location.lat,
                 lng: location.lng
-            },
-            title: location.name,
-            icon: location.icon,
-            animation: google.maps.Animation.DROP
+            }
         });
 
         location.marker = marker;
