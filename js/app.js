@@ -17,7 +17,7 @@ window.addEventListener("load", () => {
         let img = `<img src='https://openweathermap.org/img/w/${icon}.png' class='img-responsive pull-left'>`;
         $(".temperature").append(img, data.main.temp-273.15 + "&#176;C | " + data.weather[0].main);
     })
-    .fail(() => alert("Cannot fetch data from the servers. Please try again later."));
+    .fail(() => alert("Cannot fetch data from the servers. Please try again later."));  // Error handling.
 
     // Load the modal when the page loads.
     $("#welcome-modal").modal("show");
