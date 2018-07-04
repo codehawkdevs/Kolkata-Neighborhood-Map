@@ -50,8 +50,9 @@ Just open the file `index.html` and you are good to go.
 
 ## APIs Used
 
-- [MediaWiki action API](https://www.mediawiki.org/wiki/API:Main_page)
-- [OpenWeatherMap API](https://openweathermap.org/API)
+- [Google Maps API](https://cloud.google.com/maps-platform/) to display the map.
+- [MediaWiki action API](https://www.mediawiki.org/wiki/API:Main_page) to fetch content from Wikipedia.
+- [OpenWeatherMap API](https://openweathermap.org/API) to fetch current weather data.
 
 ## License
 
