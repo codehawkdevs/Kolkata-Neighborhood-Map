@@ -38,7 +38,7 @@ A working demo of this application can be found over [here](https://sdey96.githu
 
 In this project, the models are put in the file `model.js` located inside the `js` directory, and the file `app.js` contains the ViewModel.
 
-## How to run this application?
+## How to Run This Application?
 
 Just open the file `index.html` and you are good to go.
 
