@@ -98,7 +98,7 @@ function initMap() {
  * Course link: https://in.udacity.com/course/intro-to-ajax--ud110
  */
 function getWikiData(location) {
-    let wikiRequestTimeOut = setTimeout(function() {
+    let wikiRequestTimeOut = setTimeout(() => {
         window.alert("Something went wrong. Please try again later.");
     }, 8000);
 
@@ -107,7 +107,7 @@ function getWikiData(location) {
     $.ajax({
         url: wikiUrl,
         dataType: "jsonp",
-        success: function(response) {
+        success: (response) => {
             let articleList = response[1];
             let url = "https://en.wikipedia.org/wiki/" + articleList[0];
             location.url = url;
@@ -149,7 +149,7 @@ let viewModel = function() {
         location.marker = marker;
 
         // Handling of "click" event on a specific marker.
-        marker.addListener("click", function() {
+        marker.addListener("click", () => {
 
             // Let the marker bounce when it is clicked.
             marker.setAnimation(google.maps.Animation.BOUNCE);
@@ -158,21 +158,21 @@ let viewModel = function() {
             self.wikiInfoWindow(location, marker, largeInfoWindow);
 
             // Stop the animation after 800 ms.
-            setTimeout(function() {
+            setTimeout(() => {
                 location.marker.setAnimation(null);
             }, 800);
         });
     }
 
     // Render content in the infowindow.
-    self.wikiInfoWindow = function(location, marker, infoWindow) {
+    self.wikiInfoWindow = (location, marker, infoWindow) => {
         infoWindow.marker = marker;
         let jsonUrl, imageData, infoWindowHead, infoWindowBody, infoWindowFooter;
 
         jsonUrl = "https://en.wikipedia.org/w/api.php?action=query&origin=*&prop=pageimages&format=json&piprop=original&titles=" + location.wikiArticle;
 
         // Make an asynchronous request to get featured image of the concerned article from Wikipedia.
-        $.getJSON(jsonUrl, function(data){
+        $.getJSON(jsonUrl, (data) => {
 
             // Get the link to the featured image and store it in the variable `imageData`.
             for (let pageId in data.query.pages) {
@@ -196,7 +196,7 @@ let viewModel = function() {
 
 
     // Open the infowindow when a specific location from the list  is clicked.
-    self.wikiInfo = function(location) {
+    self.wikiInfo = (location) => {
 
         // Render information received from Wikipedia on the infowindow.
         self.wikiInfoWindow(location, location.marker, largeInfoWindow);
@@ -205,7 +205,7 @@ let viewModel = function() {
         location.marker.setAnimation(google.maps.Animation.BOUNCE);
 
         // Stop the bouncing of marker after 800 ms.
-        setTimeout(function() {
+        setTimeout(() => {
             location.marker.setAnimation(null);
         }, 800);
     };
@@ -213,10 +213,10 @@ let viewModel = function() {
     // Search and filter available location(s).
     self.inputLocation = ko.observable("");
 
-    self.locationItem = ko.computed(function() {
+    self.locationItem = ko.computed(() => {
         let text = self.inputLocation().toLowerCase();
 
-        return ko.utils.arrayFilter(self.locations(), function(location) {
+        return ko.utils.arrayFilter(self.locations(), (location) => {
 
             // If the location is found, then show it.
             if (location.name.toLowerCase().indexOf(text) !== -1) {
@@ -234,12 +234,12 @@ let viewModel = function() {
 
 
 // Fetch current weather data and show modal.
-window.addEventListener("load", function() {
+window.addEventListener("load", () => {
 
     // Fetch the current weather data from OpenWeatherMap and append it to the <div> with the id `temperature`.
     const apiEndpoint = "https://api.openweathermap.org/data/2.5/weather?q=Kolkata,IN&appid=9394141b4a982828532b32f51ea24531";
 
-    $.getJSON(apiEndpoint, function(data){
+    $.getJSON(apiEndpoint, (data) => {
         let icon = data.weather[0].icon;
         let img = "<img src='https://openweathermap.org/img/w/" + icon + ".png' class='img-responsive pull-left'>";
         $(".temperature").append(img, data.main.temp-273.15 + "&#176;C | " + data.weather[0].main);
