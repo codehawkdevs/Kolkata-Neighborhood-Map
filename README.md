@@ -11,13 +11,13 @@ This Web application is a part of Udacity's Full Stack Web Developer II Nanodegr
 
 ## Demo
 
-A working demo of this application can be found over (here)[https://sdey96.github.io/Kolkata-Neighborhood-Map/].
+A working demo of this application can be found over [here](https://sdey96.github.io/Kolkata-Neighborhood-Map/).
 
 ## Libraries Used
 
-- (Knockout.js)[http://knockoutjs.com/]
-- (jQuery)[https://jquery.com/]
-- (Bootstrap)[https://getbootstrap.com/]
+- [Knockout.js](http://knockoutjs.com/)
+- [jQuery](https://jquery.com/)
+- [Bootstrap](https://getbootstrap.com/)
 
 ## License
 
