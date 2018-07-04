@@ -88,7 +88,7 @@ function initMap() {
         }]
     });
 
-    // Apply bindings to ViewModel.
+    // Apply bindings to the ViewModel.
     ko.applyBindings(new viewModel());
 }
 
