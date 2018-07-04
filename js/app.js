@@ -13,22 +13,23 @@ window.addEventListener("load", () => {
     const apiEndpoint = "https://api.openweathermap.org/data/2.5/weather?q=Kolkata,IN&appid=9394141b4a982828532b32f51ea24531";
 
     $.getJSON(apiEndpoint, (data) => {
-        let icon = data.weather[0].icon;
-        let img = `<img src='https://openweathermap.org/img/w/${icon}.png' class='img-responsive pull-left'>`;
-        $(".temperature").append(img, data.main.temp-273.15 + "&#176;C | " + data.weather[0].main);
-    }) .fail(() => alert("Cannot fetch data from the servers. Please try again later."));  // Error handling.
+        $(".temperature").append(`
+                    <img src='https://openweathermap.org/img/w/${data.weather[0].icon}.png' class='img-responsive pull-left'>
+                    ${data.main.temp - 273.15} &#176;C | ${data.weather[0].main}`);
+    }).fail(() => alert("Cannot fetch weather data from the servers. Please try again later."));  // Error handling.
 
     // Load the modal when the page loads.
     $("#welcome-modal").modal("show");
 });
 
 
-/* Get Wikipedia article from the Wikipedia API and do error handling.
+/**
+ * Get Wikipedia article from the Wikipedia API and do error handling.
  * Part of this code has been brought from Udacity's "Intro to AJAX" course.
  * Course link: https://in.udacity.com/course/intro-to-ajax--ud110
  */
 function getWikiData(location) {
-    let wikiRequestTimeOut = setTimeout(() => alert("Something went wrong. Please try again later."), 8000);
+    let wikiRequestTimeOut = setTimeout(() => alert("Cannot fetch data from Wikipedia; please try again later."), 8000);
 
     let wikiUrl = `https://en.wikipedia.org/w/api.php?action=opensearch&search=${location.wikiArticle}&format=json&callback=wikiCallback`;
 
@@ -49,7 +50,8 @@ function getWikiData(location) {
 
 let map;
 
-/* Initialize the map with custom styles.
+/**
+ * Initialize the map with custom styles.
  * The styles have been downloaded from Snazzy Maps. For more information, kindly
  * visit their website, https://snazzymaps.com.
  */
@@ -57,7 +59,7 @@ function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
         center: {
             lat: 22.572645,
-            lng: 88.363892
+            lng: 88.363892,
         },
         zoom: 12,
         gestureHandling: "cooperative",
@@ -127,7 +129,7 @@ function initMap() {
             }, {
                 "lightness": "12"
             }]
-        }]
+        }],
     });
 
     // Apply bindings to the ViewModel.
@@ -138,7 +140,8 @@ function initMap() {
 // ViewModel
 let viewModel = function() {
 
-    /* The variable `locations` is defined in the file `model.js` which is
+    /**
+     * The variable `locations` is defined in the file `model.js` which is
      * located inside the directory `js` in the root directory.
      */
     this.locations = ko.observableArray(locations);
@@ -157,8 +160,8 @@ let viewModel = function() {
             animation: google.maps.Animation.DROP,
             position: {
                 lat: location.lat,
-                lng: location.lng
-            }
+                lng: location.lng,
+            },
         });
 
         location.marker = marker;
@@ -180,8 +183,7 @@ let viewModel = function() {
     // Render content in the infowindow.
     this.wikiInfoWindow = (location, marker, infoWindow) => {
         infoWindow.marker = marker;
-        let jsonUrl, imageData, infoWindowHead, infoWindowBody, infoWindowFooter;
-
+        let jsonUrl, imageData;
         jsonUrl = `https://en.wikipedia.org/w/api.php?action=query&origin=*&prop=pageimages&format=json&piprop=original&titles=${location.wikiArticle}`;
 
         // Make an asynchronous request to get featured image of the concerned article from Wikipedia.
@@ -192,26 +194,28 @@ let viewModel = function() {
                 imageData = data.query.pages[pageId].original.source;
             }
 
-            /* In the following statements, `location.url` and `location.extract` are extracted from the function `getWikiData()`.
+            /**
+             * =================================================================================================================
+             *  Set content in the infowindow.
+             * =================================================================================================================
+             * In the following statements, `location.url` and `location.extract` are extracted from the function `getWikiData()`.
              * They are essentially being used to get the URL and the first paragraph of the article, respectively.
              */
-            infoWindowContent = `<div>
-                                  <h1><a target='_blank' href='${location.url}'>${marker.title}</a></h1>
-                                </div>
+            infoWindow.setContent(`
+                    <div>
+                        <h1><a target='_blank' href='${location.url}'>${marker.title}</a></h1>
+                    </div>
 
-                                <div>
-                                   <img src='${imageData}' class='img-responsive' style='width: 100%; height: 270px;'>
-                                   <p>${location.extract[0]}</p>
-                                   <hr>
-                                   <p>
-                                      Brought to you by
-                                      <img src='https://png.icons8.com/windows/15/000000/wikipedia.png'> Wikipedia.
-                                      Explore more on <a target='_blank' href='https://www.google.com/search?q=${marker.title}'>Google</a>.
-                                   </p>
-                                </div>`;
-
-            // Set content in the infowindow.
-            infoWindow.setContent(infoWindowContent);
+                    <div>
+                        <img src='${imageData}' class='img-responsive' style='width: 100%; height: 270px;'>
+                        <p>${location.extract[0]}</p>
+                        <hr>
+                        <p>
+                            Brought to you by
+                            <img src='https://png.icons8.com/windows/15/000000/wikipedia.png'> Wikipedia.
+                            Explore more on <a target='_blank' href='https://www.google.com/search?q=${marker.title}'>Google</a>.
+                            </p>
+                    </div>`);
 
             // Open the infowindow on the specified marker.
             infoWindow.open(map, marker);
