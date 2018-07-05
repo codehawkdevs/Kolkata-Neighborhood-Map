@@ -233,7 +233,7 @@ let viewModel = function() {
 
             // Open the infowindow on the specified marker.
             infoWindow.open(map, marker);
-        });
+        }).fail(() => alert("Cannot contact Wikipedia servers at the moment. Please try again later."));  // Error handling.
     };
 
 
