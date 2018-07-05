@@ -258,12 +258,12 @@ let viewModel = function() {
 
         return ko.utils.arrayFilter(this.locations(), (location) => {
 
-            // If the location is found, then show it in the list.
+            // If the location is found, then show it in the list as well as on the map.
             if (location.name.toLowerCase().indexOf(text) !== -1) {
                 location.marker.setVisible(true);
                 return true;
             }
-            // If the location isn't found, then hide it from the list.
+            // If the location isn't found, then hide it from the list as well as from the map.
             else {
                 location.marker.setVisible(false);
                 return false;
