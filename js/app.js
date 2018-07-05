@@ -163,7 +163,7 @@ let viewModel = function() {
 
     for (let place of this.places()) {
 
-        // Get Wikipedia data for the current place.
+        // Get Wikipedia data of the current place.
         getWikiData(place);
 
         // Position the markers.
@@ -203,7 +203,7 @@ let viewModel = function() {
         // Make an asynchronous request to get featured image of the concerned article from Wikipedia.
         $.getJSON(jsonUrl, (data) => {
 
-            // Get the link to the featured image and store it in the variable `imageData`.
+            // Get the link to the Wikipedia article's featured image and store it in the variable `imageData`.
             for (let pageId in data.query.pages) {
                 imageData = data.query.pages[pageId].original.source;
             }
@@ -237,7 +237,7 @@ let viewModel = function() {
     };
 
 
-    // Open the infowindow when a specific place from the list is clicked.
+    // Open the place marker's infowindow when a place is clicked from the list.
     this.wikiInfo = (place) => {
 
         // Render information received from Wikipedia on the infowindow.
