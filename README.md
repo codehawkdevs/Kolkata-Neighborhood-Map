@@ -7,8 +7,8 @@ This Web application is a part of Udacity's Full Stack Web Developer II Nanodegr
 
 - Shows a list of popular places in Kolkata.
 - It is a single-page application, meaning it does not refresh the page for each new request made.
-- Uses the Wikipedia API to fetch and show information about the places.
-- Shows realtime weather of Kolkata.
+- Uses the Wikipedia API to fetch and show information about the places asynchronously.
+- Shows real-time weather of Kolkata.
 
 ## Demo
 
@@ -50,7 +50,7 @@ Just open the file `index.html` and you are good to go.
 
 ## APIs Used
 
-- [Google Maps API](https://cloud.google.com/maps-platform/) to display the map.
+- [Google Maps API](https://cloud.google.com/maps-platform/) to display the map and position markers.
 - [MediaWiki action API](https://www.mediawiki.org/wiki/API:Main_page) to fetch content from Wikipedia.
 - [OpenWeatherMap API](https://openweathermap.org/API) to fetch current weather data.
 
