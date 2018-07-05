@@ -1,5 +1,5 @@
 /* Main section */
-html, main {
+html {
     height: 100%;
     width: 100%;
 }
@@ -9,25 +9,16 @@ body {
     padding: 0;
     margin: 0;
 }
-h1 {
-    font-family: 'Amatic SC', cursive;
-    font-size: 47px;
-    margin-top: -3px;
-    text-align: center;
-    position: relative;
-    margin-bottom: -2px;
-    z-index: 1;
-}
 .container {
-    width: 100%;
     margin: 0;
+    width: 100%;
 }
 .container-map {
+    position: relative;
+    z-index: 0;
     background-color: hsl(76, 89%, 52%);
     height: 100vh;
     max-width: 100%;
-    position: relative;
-    z-index: 0;
 }
 .map {
     height: 100%;
@@ -35,6 +26,15 @@ h1 {
 .nav-section {
     background-color: hsl(76, 89%, 52%);
     z-index: 2;
+}
+h1 {
+    position: relative;
+    font-family: 'Amatic SC', cursive;
+    font-size: 47px;
+    margin-top: -3px;
+    margin-bottom: -2px;
+    text-align: center;
+    z-index: 1;
 }
 p {
     font-family: 'Roboto', sans-serif;
@@ -45,9 +45,7 @@ ul {
     color: #636161;
 }
 li {
-    /* Show a cursor when the mouse pointer is
-     * is hovered on a list item.
-     */
+    /* Show a cursor when the mouse pointer is hovered on a list item. */
     cursor: pointer;
 }
 
@@ -68,15 +66,10 @@ li {
     transition: transform .2s ease-in-out;
 }
 
-.temperature {
+.weather {
     font-family: 'Roboto', sans-serif;
     display: flex;
     align-items: center;
-    justify-content: center;
-}
-
-.modal-footer {
-    display: flex;
     justify-content: center;
 }
 
@@ -84,16 +77,22 @@ li {
 .modal {
     text-align: center;
 }
+.modal-dialog {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+}
+.modal-footer {
+    display: flex;
+    justify-content: center;
+}
+
+/* Optimize modal for small screens. */
 @media screen and (min-width: 768px) {
     .modal:before {
         display: inline-block;
-        vertical-align: middle;
         content: " ";
         height: 100%;
+        vertical-align: middle;
     }
-}
-.modal-dialog {
-    display: inline-block;
-    text-align: left;
-    vertical-align: middle;
 }

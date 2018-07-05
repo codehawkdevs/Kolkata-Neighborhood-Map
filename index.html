@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
-      <meta charset="utf-8">
+      <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
       <meta http-equiv="X-UA-Compatible" content="IE=Edge">
       <title>Kolkata Neighbourhoods</title>
+
+      <!-- Favicon -->
       <link rel="shortcut icon" type="image/x-icon" href="img/icons8-binoculars-48.png">
+
+      <!-- Stylesheets -->
       <link rel="stylesheet" href="css/bootstrap.min.css">
       <link rel="stylesheet" href="css/bootstrap.min.modal.css">
       <link rel="stylesheet" href="css/main.css">
+
+      <!-- Fonts -->
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic+SC|Montserrat|Roboto">
-      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
    </head>
    <body>
        <!-- Main section -->
@@ -19,14 +24,22 @@
                 <div class="col-md-3 nav-section">
                     <h1>Kolkata Neighbourhoods</h1>
                     <img src="img/icons8-binoculars-48.png" class="img-responsive center-block">
-                    <div class="temperature"></div>
+
+                    <!-- Current weather data is appended here. -->
+                    <div class="weather"></div>
+
+                    <!-- Search box -->
                     <div>
                         <input data-bind="textInput: inputLocation" placeholder="Search" style="width: 100%">
                     </div>
+
+                    <!-- List of locations -->
                     <ul data-bind= "foreach: locationItem" class="list-group">
                         <li data-bind="text: name, click: $parent.wikiInfo" class="list-group-item"></li>
                     </ul>
                 </div>
+
+            <!-- The map is loaded here. -->
             <div class="container-map">
                 <div id="map" class="map col-md-9"></div>
             </div>

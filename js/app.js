@@ -6,29 +6,38 @@
  */
 
 
-// Fetch current weather data and show modal.
+/**
+ * ======================================================
+ * Fetch current weather data and show the welcome modal.
+ * ======================================================
+ */
 window.addEventListener("load", () => {
 
-    // Fetch the current weather data from OpenWeatherMap and append it to the <div> with the id `temperature`.
+    // Fetch the current weather data from OpenWeatherMap.
     const apiEndpoint = "https://api.openweathermap.org/data/2.5/weather?q=Kolkata,IN&appid=9394141b4a982828532b32f51ea24531";
 
     $.getJSON(apiEndpoint, (data) => {
-        $(".temperature").append(`
+        // Append the received weather data to the <div> with the id `weather` in `index.html`.
+        $(".weather").append(`
                     <img src='https://openweathermap.org/img/w/${data.weather[0].icon}.png' class='img-responsive pull-left'>
                     ${data.main.temp - 273.15} &#176;C | ${data.weather[0].main}`);
     }).fail(() => alert("Cannot fetch weather data from the servers. Please try again later."));  // Error handling.
 
-    // Load the modal when the page loads.
+    // Load the welcome modal when the page loads.
     $("#welcome-modal").modal("show");
 });
 
 
 /**
- * Get Wikipedia article from the Wikipedia API and do error handling.
+ * ==============================================================================
+ * Get the Wikipedia article of the concerned location and handle errors (if any).
+ * ==============================================================================
  * Part of this code has been brought from Udacity's "Intro to AJAX" course.
  * Course link: https://in.udacity.com/course/intro-to-ajax--ud110
  */
 function getWikiData(location) {
+
+    // Error handling
     let wikiRequestTimeOut = setTimeout(() => alert("Cannot fetch data from Wikipedia at the moment. Please try again later."), 8000);
 
     let wikiUrl = `https://en.wikipedia.org/w/api.php?action=opensearch&search=${location.wikiArticle}&format=json&callback=wikiCallback`;
@@ -50,7 +59,9 @@ function getWikiData(location) {
 let map;
 
 /**
+ * ==============================================================================
  * Initialize the map with custom styles.
+ * ==============================================================================
  * The styles have been downloaded from Snazzy Maps. For more information, kindly
  * visit their website, https://snazzymaps.com.
  */
@@ -136,15 +147,19 @@ function initMap() {
 }
 
 
-// ViewModel
+/**
+ * ==========
+ * ViewModel
+ * ==========
+ */
 let viewModel = function() {
+    let largeInfoWindow = new google.maps.InfoWindow();
 
     /**
      * The variable `locations` is defined in the file `model.js` which is
-     * located inside the directory `js` in the root directory.
+     * located inside the directory `js` inside the root directory.
      */
     this.locations = ko.observableArray(locations);
-    let largeInfoWindow = new google.maps.InfoWindow();
 
     for (let location of this.locations()) {
 
