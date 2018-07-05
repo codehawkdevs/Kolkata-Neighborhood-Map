@@ -30,17 +30,17 @@ window.addEventListener("load", () => {
 
 /**
  * ==============================================================================
- * Get the Wikipedia article of the concerned location and handle errors (if any).
+ * Get the Wikipedia article of the concerned place and handle errors (if any).
  * ==============================================================================
  * Part of this code has been brought from Udacity's "Intro to AJAX" course.
  * Course link: https://in.udacity.com/course/intro-to-ajax--ud110
  */
-function getWikiData(location) {
+function getWikiData(place) {
 
     // Error handling
     let wikiRequestTimeOut = setTimeout(() => alert("Cannot fetch data from Wikipedia at the moment. Please try again later."), 8000);
 
-    let wikiUrl = `https://en.wikipedia.org/w/api.php?action=opensearch&search=${location.wikiArticle}&format=json&callback=wikiCallback`;
+    let wikiUrl = `https://en.wikipedia.org/w/api.php?action=opensearch&search=${place.wikiArticle}&format=json&callback=wikiCallback`;
 
     $.ajax({
         url: wikiUrl,
@@ -48,8 +48,8 @@ function getWikiData(location) {
         success: (response) => {
             let articleList = response[1];
             let url = `https://en.wikipedia.org/wiki/${articleList[0]}`;
-            location.url = url;
-            location.extract = response[2];
+            place.url = url;
+            place.extract = response[2];
             clearTimeout(wikiRequestTimeOut);
         }
     });
@@ -156,29 +156,29 @@ let viewModel = function() {
     let largeInfoWindow = new google.maps.InfoWindow();
 
     /**
-     * The variable `locations` is defined in the file `model.js` which is
+     * The variable `places` is defined in the file `model.js` which is
      * located inside the directory `js` inside the root directory.
      */
-    this.locations = ko.observableArray(locations);
+    this.places = ko.observableArray(places);
 
-    for (let location of this.locations()) {
+    for (let place of this.places()) {
 
-        // Get Wikipedia data for the current location.
-        getWikiData(location);
+        // Get Wikipedia data for the current place.
+        getWikiData(place);
 
         // Position the markers.
         let marker = new google.maps.Marker({
             map: map,
-            title: location.name,
-            icon: location.icon,
+            title: place.name,
+            icon: place.icon,
             animation: google.maps.Animation.DROP,
             position: {
-                lat: location.lat,
-                lng: location.lng,
+                lat: place.lat,
+                lng: place.lng,
             },
         });
 
-        location.marker = marker;
+        place.marker = marker;
 
         // Handling of "click" event on a specific marker.
         marker.addListener("click", () => {
@@ -187,18 +187,18 @@ let viewModel = function() {
             marker.setAnimation(google.maps.Animation.BOUNCE);
 
             // Show the infowindow when the marker is clicked.
-            this.wikiInfoWindow(location, marker, largeInfoWindow);
+            this.wikiInfoWindow(place, marker, largeInfoWindow);
 
             // Stop the animation after 800 ms.
-            setTimeout(() => location.marker.setAnimation(null), 800);
+            setTimeout(() => place.marker.setAnimation(null), 800);
         });
     }
 
     // Render content in the infowindow.
-    this.wikiInfoWindow = (location, marker, infoWindow) => {
+    this.wikiInfoWindow = (place, marker, infoWindow) => {
         infoWindow.marker = marker;
         let jsonUrl, imageData;
-        jsonUrl = `https://en.wikipedia.org/w/api.php?action=query&origin=*&prop=pageimages&format=json&piprop=original&titles=${location.wikiArticle}`;
+        jsonUrl = `https://en.wikipedia.org/w/api.php?action=query&origin=*&prop=pageimages&format=json&piprop=original&titles=${place.wikiArticle}`;
 
         // Make an asynchronous request to get featured image of the concerned article from Wikipedia.
         $.getJSON(jsonUrl, (data) => {
@@ -212,17 +212,17 @@ let viewModel = function() {
              * =================================================================================================================
              *  Set content in the infowindow.
              * =================================================================================================================
-             * In the following statements, `location.url` and `location.extract` are extracted from the function `getWikiData()`.
+             * In the following statements, `place.url` and `place.extract` are extracted from the function `getWikiData()`.
              * They are essentially being used to get the URL and the first paragraph of the article, respectively.
              */
             infoWindow.setContent(`
                     <div>
-                        <h1><a target='_blank' href='${location.url}'>${marker.title}</a></h1>
+                        <h1><a target='_blank' href='${place.url}'>${marker.title}</a></h1>
                     </div>
 
                     <div>
                         <img src='${imageData}' class='img-responsive' style='width: 100%; height: 270px;'>
-                        <p>${location.extract[0]}</p>
+                        <p>${place.extract[0]}</p>
                         <hr>
                         <p>
                             Brought to you by
@@ -237,35 +237,35 @@ let viewModel = function() {
     };
 
 
-    // Open the infowindow when a specific location from the list is clicked.
-    this.wikiInfo = (location) => {
+    // Open the infowindow when a specific place from the list is clicked.
+    this.wikiInfo = (place) => {
 
         // Render information received from Wikipedia on the infowindow.
-        this.wikiInfoWindow(location, location.marker, largeInfoWindow);
+        this.wikiInfoWindow(place, place.marker, largeInfoWindow);
 
-        // Let the marker bounce when the location is selected from the list.
-        location.marker.setAnimation(google.maps.Animation.BOUNCE);
+        // Let the marker bounce when the place is selected from the list.
+        place.marker.setAnimation(google.maps.Animation.BOUNCE);
 
         // Stop the bouncing of marker after 800 ms.
-        setTimeout(() => location.marker.setAnimation(null), 800);
+        setTimeout(() => place.marker.setAnimation(null), 800);
     };
 
-    // Search and filter available location(s).
+    // Search and filter available place(s).
     this.inputLocation = ko.observable("");
 
     this.locationItem = ko.computed(() => {
         let text = this.inputLocation().toLowerCase();
 
-        return ko.utils.arrayFilter(this.locations(), (location) => {
+        return ko.utils.arrayFilter(this.places(), (place) => {
 
-            // If the location is found, then show it in the list as well as on the map.
-            if (location.name.toLowerCase().indexOf(text) !== -1) {
-                location.marker.setVisible(true);
+            // If the place is found, then show it in the list as well as on the map.
+            if (place.name.toLowerCase().indexOf(text) !== -1) {
+                place.marker.setVisible(true);
                 return true;
             }
-            // If the location isn't found, then hide it from the list as well as from the map.
+            // If the place isn't found, then hide it from the list as well as from the map.
             else {
-                location.marker.setVisible(false);
+                place.marker.setVisible(false);
                 return false;
             }
         });

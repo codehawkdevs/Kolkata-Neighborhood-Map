@@ -7,7 +7,7 @@
 
 
 // List of locations in Kolkata to show on the map.
-const locations = [{
+const places = [{
     "name": "Victoria Memorial",
     "lat": 22.544808,
     "lng": 88.342558,
