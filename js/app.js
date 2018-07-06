@@ -76,6 +76,7 @@ function initMap() {
         zoomControl: false,
         fullscreenControl: false,
         streetViewControl: false,
+        mapTypeControl: false,
         styles: styles,     // `styles` is located in the file `config.js` in the current directory.
     });
 
