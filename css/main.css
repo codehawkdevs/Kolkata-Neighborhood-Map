@@ -3,16 +3,19 @@ html {
     height: 100%;
     width: 100%;
 }
+
 body {
     height: 100%;
     width: 100%;
     padding: 0;
     margin: 0;
 }
+
 .container {
     margin: 0;
     width: 100%;
 }
+
 .container-map {
     position: relative;
     z-index: 0;
@@ -20,30 +23,36 @@ body {
     height: 100vh;
     max-width: 100%;
 }
+
 .map {
     height: 100%;
 }
+
 .nav-section {
     background-color: hsl(76, 89%, 52%);
     z-index: 2;
 }
+
 h1 {
     position: relative;
-    font-family: 'Amatic SC', cursive;
+    font-family: "Amatic SC", cursive;
     font-size: 47px;
     margin-top: -3px;
     margin-bottom: -2px;
     text-align: center;
     z-index: 1;
 }
+
 p {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     align-self: center;
 }
+
 ul {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     color: #636161;
 }
+
 li {
     /* Show a cursor when the mouse pointer is hovered on a list item. */
     cursor: pointer;
@@ -59,6 +68,7 @@ li {
     transform: scale(1.060);
     transition: transform .2s ease-in-out;
 }
+
 .list-group-item:active {
     color: white;
     background: rgb(114, 10, 10);
@@ -67,7 +77,7 @@ li {
 }
 
 .weather {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -77,11 +87,13 @@ li {
 .modal {
     text-align: center;
 }
+
 .modal-dialog {
     display: inline-block;
     vertical-align: middle;
     text-align: left;
 }
+
 .modal-footer {
     display: flex;
     justify-content: center;
