@@ -58,12 +58,11 @@ li {
     cursor: pointer;
 }
 
-/* To add zooming effect on hover */
+
+/* Add effect on hover */
 .list-group-item:hover {
     color: white;
     background: red;
-    -webkit-box-shadow: 0px 0px 61px -3px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 0px 61px -3px rgba(0,0,0,0.75);
     box-shadow: 0px 0px 61px -3px rgba(0,0,0,0.75);
     transform: scale(1.060);
     transition: transform .2s ease-in-out;
@@ -76,12 +75,15 @@ li {
     transition: transform .2s ease-in-out;
 }
 
+
+/* Align weather data properly. */
 .weather {
     font-family: "Roboto", sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 
 /* Show Bootstrap modal vertically centered. */
 .modal {
