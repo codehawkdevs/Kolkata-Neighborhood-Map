@@ -73,6 +73,9 @@ function initMap() {
         },
         zoom: 12,
         gestureHandling: "cooperative",
+        zoomControl: false,
+        fullscreenControl: false,
+        streetViewControl: false,
         styles: styles,     // `styles` is located in the file `config.js` in the current directory.
     });
 
@@ -154,7 +157,7 @@ const viewModel = function() {
              */
             let infoWindowContent = infoWindow.getContent();
             infoWindowContent = `
-                    <div>
+                    <div class='infowindow'>
                         <h1><a target='_blank' href='${place.url}'>${marker.title}</a></h1>
                     </div>
 

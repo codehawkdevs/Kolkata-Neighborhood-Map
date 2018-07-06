@@ -58,6 +58,13 @@ li {
     cursor: pointer;
 }
 
+.infowindow h1 {
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 2px;
+    margin-bottom: 3px;
+}
 
 /* Add effect on hover */
 .list-group-item:hover {
