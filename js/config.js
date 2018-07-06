@@ -1,9 +1,10 @@
 // Configuration file
 
-/**
- * The styles configuration has been downloaded from Snazzy Maps. For more information, kindly
- * visit their website, https://snazzymaps.com.
- */
+// OpenWeatherMap API App ID.
+const owmAppId = "9394141b4a982828532b32f51ea24531";
+
+
+// Google Maps styles. Downloaded from Snazzy Maps: https://snazzymaps.com.
 const styles = [{
     "featureType": "all",
     "elementType": "all",

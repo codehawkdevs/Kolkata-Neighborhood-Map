@@ -14,7 +14,7 @@
 window.addEventListener("load", () => {
 
     // Fetch the current weather data from OpenWeatherMap.
-    const apiEndpoint = "https://api.openweathermap.org/data/2.5/weather?q=Kolkata,IN&appid=9394141b4a982828532b32f51ea24531";
+    const apiEndpoint = `https://api.openweathermap.org/data/2.5/weather?q=Kolkata,IN&appid=${owmAppId}`;
 
     $.getJSON(apiEndpoint, (data) => {
         // Append the received weather data to the <div> with the id `weather` in `index.html`.
@@ -78,6 +78,9 @@ function initMap() {
     ko.applyBindings(new viewModel());
 }
 
+function mapsErrorHandler() {
+    alert("Could not load the map. Please refresh this page or try again later.")
+}
 
 /**
  * ==========
