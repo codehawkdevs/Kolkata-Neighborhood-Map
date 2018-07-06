@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * Copyright (c) 2018 Subhadeep Dey
  *
@@ -87,7 +89,7 @@ function mapsErrorHandler() {
  * ViewModel
  * ==========
  */
-let viewModel = function() {
+const viewModel = function() {
     let largeInfoWindow = new google.maps.InfoWindow();
 
     /**
@@ -197,12 +199,23 @@ let viewModel = function() {
 
             // If the place is found, then show it in the list as well as on the map.
             if (place.name.toLowerCase().indexOf(text) !== -1) {
+
+                // Display the matching markers.
                 place.marker.setVisible(true);
+
+                // Close any currently opened infowindow.
+                if (largeInfoWindow) {
+                    largeInfoWindow.close();
+                }
+
                 return true;
             }
             // If the place isn't found, then hide it from the list as well as from the map.
             else {
+
+                // Hide the markers if the result is not found in the list.
                 place.marker.setVisible(false);
+
                 return false;
             }
         });
