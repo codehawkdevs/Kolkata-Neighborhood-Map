@@ -90,7 +90,7 @@ function mapsErrorHandler() {
  * ==========
  */
 const viewModel = function() {
-    let largeInfoWindow = new google.maps.InfoWindow();
+    let largeInfoWindow = new google.maps.InfoWindow({maxWidth: 300});
 
     /**
      * The variable `places` is defined in the file `model.js` which is
