@@ -79,7 +79,7 @@ function initMap() {
 }
 
 function mapsErrorHandler() {
-    alert("Could not load the map. Please refresh this page or try again later.")
+    alert("Could not load the map. Please refresh this page or try again later.");
 }
 
 /**
