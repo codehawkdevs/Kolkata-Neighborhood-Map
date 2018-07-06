@@ -2,7 +2,7 @@
 <html lang="en">
    <head>
       <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="IE=Edge">
       <title>Kolkata Neighbourhoods</title>
 
@@ -15,7 +15,7 @@
       <link rel="stylesheet" href="css/main.css">
 
       <!-- Fonts -->
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic+SC|Montserrat|Roboto">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic+SC%7CMontserrat%7CRoboto">
    </head>
    <body>
        <!-- Main section -->
@@ -23,7 +23,7 @@
            <div class="row">
                 <div class="col-md-3 nav-section">
                     <h1>Kolkata Neighbourhoods</h1>
-                    <img src="img/icons8-binoculars-48.png" class="img-responsive center-block">
+                    <img src="img/icons8-binoculars-48.png" class="img-responsive center-block" alt="binocular-icon">
 
                     <!-- Current weather data is appended here. -->
                     <div class="weather"></div>
@@ -39,11 +39,12 @@
                     </ul>
                 </div>
 
-            <!-- The map is loaded here. -->
-            <div class="container-map">
-                <div id="map" class="map col-md-9"></div>
+                <!-- The map is loaded here. -->
+                <div class="container-map">
+                    <div id="map" class="map col-md-9"></div>
+                </div>
             </div>
-        </section>
+       </section>
         <!-- Main section ends -->
 
         <!-- Modal -->
@@ -76,6 +77,7 @@
       <script src="js/bootstrap.min.js"></script>
       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2zmLZ1PDcqI-NcB-ayhvOzBtz1gCUslI&callback=initMap" async defer></script>
       <script src="js/model.js"></script>
+      <script src="js/config.js"></script>
       <script src="js/app.js"></script>
     </body>
 </html>
