@@ -150,21 +150,23 @@ let viewModel = function() {
              * In the following statements, `place.url` and `place.extract` are extracted from the function `getWikiData()`.
              * They are essentially being used to get the URL and the first paragraph of the article, respectively.
              */
-            infoWindow.setContent(`
+            let infoWindowContent = infoWindow.getContent();
+            infoWindowContent = `
                     <div>
                         <h1><a target='_blank' href='${place.url}'>${marker.title}</a></h1>
                     </div>
 
                     <div>
-                        <img src='${imageData}' class='img-responsive' style='width: 100%; height: 270px;'>
+                        <img src='${imageData}' alt='Featured Image' style='height: 240px; width: 100%'>
                         <p>${place.extract[0]}</p>
                         <hr>
                         <p>
                             Brought to you by
-                            <img src='https://png.icons8.com/windows/15/000000/wikipedia.png'> Wikipedia.
+                            <img src='https://png.icons8.com/windows/15/000000/wikipedia.png' alt='Wiki Logo'> Wikipedia.
                             Explore more on <a target='_blank' href='https://www.google.com/search?q=${marker.title}'>Google</a>.
                         </p>
-                    </div>`);
+                    </div>`;
+            infoWindow.setContent(infoWindowContent);
 
             // Open the infowindow on the specified marker.
             infoWindow.open(map, marker);
