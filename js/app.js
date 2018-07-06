@@ -62,8 +62,6 @@ let map;
  * ==============================================================================
  * Initialize the map with custom styles.
  * ==============================================================================
- * The styles have been downloaded from Snazzy Maps. For more information, kindly
- * visit their website, https://snazzymaps.com.
  */
 function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
@@ -73,73 +71,7 @@ function initMap() {
         },
         zoom: 12,
         gestureHandling: "cooperative",
-        styles: [{
-            "featureType": "all",
-            "elementType": "all",
-            "stylers": [{
-                "saturation": "32"
-            }, {
-                "lightness": "-3"
-            }, {
-                "visibility": "on"
-            }, {
-                "weight": "1.18"
-            }]
-        }, {
-            "featureType": "administrative",
-            "elementType": "labels",
-            "stylers": [{
-                "visibility": "simplified"
-            }]
-        }, {
-            "featureType": "landscape",
-            "elementType": "labels",
-            "stylers": [{
-                "visibility": "on"
-            }]
-        }, {
-            "featureType": "landscape.man_made",
-            "elementType": "all",
-            "stylers": [{
-                "saturation": "-70"
-            }, {
-                "lightness": "14"
-            }]
-        }, {
-            "featureType": "poi",
-            "elementType": "labels",
-            "stylers": [{
-                "visibility": "off"
-            }]
-        }, {
-            "featureType": "road",
-            "elementType": "labels",
-            "stylers": [{
-                "visibility": "off"
-            }]
-        }, {
-            "featureType": "transit",
-            "elementType": "labels",
-            "stylers": [{
-                "visibility": "off"
-            }]
-        }, {
-            "featureType": "water",
-            "elementType": "all",
-            "stylers": [{
-                "saturation": "100"
-            }, {
-                "lightness": "-14"
-            }]
-        }, {
-            "featureType": "water",
-            "elementType": "labels",
-            "stylers": [{
-                "visibility": "on"
-            }, {
-                "lightness": "12"
-            }]
-        }],
+        styles: styles,     // `styles` is located in the file `config.js` in the current directory.
     });
 
     // Apply bindings to the ViewModel.
