@@ -1,4 +1,5 @@
 # Kolkata Neighborhood Map
+
 A single page application featuring a map of popular places in Kolkata.
 
 This Web application is a part of Udacity's Full Stack Web Developer II Nanodegree program.
