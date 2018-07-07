@@ -8,6 +8,12 @@
  */
 
 
+// Google Maps Error Handling.
+ function mapsErrorHandler() {
+    alert("Could not load the map. Please refresh this page or try again later.");
+}
+
+
 /**
  * ======================================================
  * Fetch current weather data and show the welcome modal.
@@ -84,9 +90,6 @@ function initMap() {
     ko.applyBindings(new viewModel());
 }
 
-function mapsErrorHandler() {
-    alert("Could not load the map. Please refresh this page or try again later.");
-}
 
 /**
  * ==========
