@@ -1,5 +1,6 @@
 # Kolkata Neighborhood Map
-A single page application featuring a map of popular places in Kolkata. 
+
+A single page application featuring a map of popular places in Kolkata.
 
 This Web application is a part of Udacity's Full Stack Web Developer II Nanodegree program.
 
@@ -29,6 +30,7 @@ A working demo of this application can be found over [here](https://sdey96.githu
 ├── js
 │   ├── app.js
 │   ├── bootstrap.min.js
+|   ├── config.js
 │   ├── jquery-3.3.1.min.js
 │   ├── knockout-3.4.2.js
 │   └── model.js
