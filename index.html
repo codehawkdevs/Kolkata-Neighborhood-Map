@@ -25,9 +25,6 @@
                     <h1>Kolkata Neighbourhoods</h1>
                     <img src="img/icons8-binoculars-48.png" class="img-responsive center-block" alt="binocular-icon">
 
-                    <!-- Current weather data is appended here. -->
-                    <div class="weather"></div>
-
                     <!-- Search box -->
                     <div>
                         <input data-bind="textInput: inputLocation" placeholder="Search" style="width: 100%">
@@ -46,30 +43,6 @@
             </div>
         </section>
         <!-- Main section ends -->
-
-        <!-- Modal -->
-        <div class="modal fade" id="welcome-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel" style="font-family: 'Roboto', sans-serif;">Welcome to Kolkata Neighborhoods!</h4>
-                    </div>
-                    <div class="modal-body">
-                        <!--Photo credits: https://www.letsenrol.com/blog/uncategorized/top-10-b-com-colleges-kolkata/ -->
-                        <img src="img/kolkata.jpg" class="img-responsive" alt="Kolkata">
-
-                        <!-- Source: https://www.oyorooms.com/blog/kolkata-travel-guide/ -->
-                        <p style="font-family: 'Roboto', sans-serif;">Kolkata, the ‘Cultural Capital of India’ is the most unique metropolis of the country. Vibrant and ideal, modern yet traditional, Kolkata intriguingly juxtaposes itself and the Hooghly River slowly ebbs and flows to match its rhythm to the city.</p>
-                        <p>Kolkata is where the rich Indian culture manifests itself wholly. Its traditional heritage fuses seamlessly with the remnants of its colonial past, adding a nostalgic charm to the city. This idiosyncrasy of Kolkata coupled with ancient landmarks, museums, shopping streets and delectable cuisine has a magnetic pull over travel enthusiasts who visit the city to experience its vibrant culture. </p>
-                    </div>
-                    <div class="modal-footer center-block">
-                      <button type="button" class="btn btn-primary" data-dismiss="modal" style="font-family: 'Roboto', sans-serif;">Let's Explore!</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Modal ends -->
 
       <!-- Load scripts -->
       <script src="js/knockout-3.4.2.js"></script>

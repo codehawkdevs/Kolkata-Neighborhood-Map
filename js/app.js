@@ -8,26 +8,10 @@
  */
 
 
-/**
- * ======================================================
- * Fetch current weather data and show the welcome modal.
- * ======================================================
- */
-window.addEventListener("load", () => {
-
-    // Fetch the current weather data from OpenWeatherMap.
-    const apiEndpoint = `https://api.openweathermap.org/data/2.5/weather?q=Kolkata,IN&appid=${owmAppId}`;
-
-    $.getJSON(apiEndpoint, (data) => {
-        // Append the received weather data to the <div> with the id `weather` in `index.html`.
-        $(".weather").append(`
-                    <img src='https://openweathermap.org/img/w/${data.weather[0].icon}.png' class='img-responsive pull-left'>
-                    ${data.main.temp - 273.15} &#176;C | ${data.weather[0].main}`);
-    }).fail(() => alert("Cannot fetch weather data from the servers. Please try again later."));  // Error handling.
-
-    // Load the welcome modal when the page loads.
-    $("#welcome-modal").modal("show");
-});
+// Google Maps Error Handling.
+function mapsErrorHandler() {
+    alert("Could not load the map. Please refresh this page or try again later.");
+}
 
 
 /**
@@ -84,9 +68,6 @@ function initMap() {
     ko.applyBindings(new viewModel());
 }
 
-function mapsErrorHandler() {
-    alert("Could not load the map. Please refresh this page or try again later.");
-}
 
 /**
  * ==========
