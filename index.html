@@ -18,12 +18,17 @@
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic+SC%7CMontserrat%7CRoboto">
    </head>
    <body>
-       <!-- Main section -->
        <section class="container-fluid">
            <div class="row">
                 <div class="col-md-3 nav-section">
                     <h1>Kolkata Neighbourhoods</h1>
                     <img src="img/icons8-binoculars-48.png" class="img-responsive center-block" alt="binocular-icon">
+
+                    <!-- Current weather data -->
+                    <div class="weather">
+                        <img data-bind="attr:{src: imagePath}" class="img-responsive pull-left" alt="Weather">
+                        <span data-bind="text: temperature"></span> &#176;C |&nbsp;<span data-bind="text: weather"></span>
+                    </div>
 
                     <!-- Search box -->
                     <div>
@@ -42,7 +47,6 @@
                 </div>
             </div>
         </section>
-        <!-- Main section ends -->
 
       <!-- Load scripts -->
       <script src="js/knockout-3.4.2.js"></script>
