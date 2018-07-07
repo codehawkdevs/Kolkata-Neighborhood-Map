@@ -1,5 +1,5 @@
 # Kolkata Neighborhood Map
-A single page application featuring a map of popular places in Kolkata. 
+A single page application featuring a map of popular places in Kolkata.
 
 This Web application is a part of Udacity's Full Stack Web Developer II Nanodegree program.
 
@@ -8,7 +8,6 @@ This Web application is a part of Udacity's Full Stack Web Developer II Nanodegr
 - Shows a list of popular places in Kolkata.
 - It is a single-page application, meaning it does not refresh the page for each new request made.
 - Uses the Wikipedia API to fetch and show information about the places asynchronously.
-- Shows real-time weather of Kolkata.
 
 ## Demo
 
@@ -29,6 +28,7 @@ A working demo of this application can be found over [here](https://sdey96.githu
 ├── js
 │   ├── app.js
 │   ├── bootstrap.min.js
+|   ├── config.js
 │   ├── jquery-3.3.1.min.js
 │   ├── knockout-3.4.2.js
 │   └── model.js
@@ -52,7 +52,6 @@ Just open the file `index.html` and you are good to go.
 
 - [Google Maps API](https://cloud.google.com/maps-platform/) to display the map and position markers.
 - [MediaWiki action API](https://www.mediawiki.org/wiki/API:Main_page) to fetch content from Wikipedia.
-- [OpenWeatherMap API](https://openweathermap.org/API) to fetch current weather data.
 
 ## License
 
