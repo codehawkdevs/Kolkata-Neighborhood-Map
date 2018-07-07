@@ -15,37 +15,14 @@
 
 
 /**
- * ======================================================
- * Fetch current weather data and show the welcome modal.
- * ======================================================
- */
-window.addEventListener("load", () => {
-
-    // Fetch the current weather data from OpenWeatherMap.
-    const apiEndpoint = `https://api.openweathermap.org/data/2.5/weather?q=Kolkata,IN&appid=${owmAppId}`;
-
-    $.getJSON(apiEndpoint, (data) => {
-        // Append the received weather data to the <div> with the id `weather` in `index.html`.
-        $(".weather").append(`
-                    <img src='https://openweathermap.org/img/w/${data.weather[0].icon}.png' class='img-responsive pull-left'>
-                    ${data.main.temp - 273.15} &#176;C | ${data.weather[0].main}`);
-    }).fail(() => alert("Cannot fetch weather data from the servers. Please try again later."));  // Error handling.
-
-    // Load the welcome modal when the page loads.
-    $("#welcome-modal").modal("show");
-});
-
-
-/**
- * ==============================================================================
  * Get the Wikipedia article of the concerned place and handle errors (if any).
- * ==============================================================================
+ *
  * Part of this code has been brought from Udacity's "Intro to AJAX" course.
  * Course link: https://in.udacity.com/course/intro-to-ajax--ud110
  */
 function getWikiData(place) {
 
-    // Error handling
+    // Error handling.
     let wikiRequestTimeOut = setTimeout(() => alert("Cannot fetch data from Wikipedia at the moment. Please try again later."), 8000);
 
     let wikiUrl = `https://en.wikipedia.org/w/api.php?action=opensearch&search=${place.wikiArticle}&format=json&callback=wikiCallback`;
@@ -66,11 +43,7 @@ function getWikiData(place) {
 
 let map;
 
-/**
- * ==============================================================================
- * Initialize the map with custom styles.
- * ==============================================================================
- */
+// Initialize the map.
 function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
         center: {
@@ -83,7 +56,7 @@ function initMap() {
         fullscreenControl: false,
         streetViewControl: false,
         mapTypeControl: false,
-        styles: styles,     // `styles` is located in the file `config.js` in the current directory.
+        styles: styles,     // `styles` is located in `js/config.js`.
     });
 
     // Apply bindings to the ViewModel.
@@ -91,19 +64,26 @@ function initMap() {
 }
 
 
-/**
- * ==========
- * ViewModel
- * ==========
- */
+// ViewModel
 const viewModel = function() {
-    let largeInfoWindow = new google.maps.InfoWindow({maxWidth: 300});
 
-    /**
-     * The variable `places` is defined in the file `model.js` which is
-     * located inside the directory `js` inside the root directory.
-     */
-    this.places = ko.observableArray(places);
+    // Fetch the current weather.
+    let self = this;
+    this.imagePath = ko.observable("");
+    this.temperature = ko.observable("");
+    this.weather = ko.observable("");
+    const apiEndpoint = `https://api.openweathermap.org/data/2.5/weather?q=Kolkata,IN&appid=${owmAppId}`;
+
+    $.getJSON(apiEndpoint, (data) => {
+        self.imagePath(`https://openweathermap.org/img/w/${data.weather[0].icon}.png`);
+        self.temperature(data.main.temp - 273.15);
+        self.weather(data.weather[0].main);
+    }).fail(() => alert("Cannot fetch weather data from the servers. Please try again later."));        // Error handling.
+
+
+    // Main functionality.
+    let largeInfoWindow = new google.maps.InfoWindow({maxWidth: 300});
+    this.places = ko.observableArray(places);       // `places` is defined inside `js/model.js`.
 
     for (let place of this.places()) {
 
@@ -153,9 +133,8 @@ const viewModel = function() {
             }
 
             /**
-             * =================================================================================================================
              *  Set content in the infowindow.
-             * =================================================================================================================
+             *
              * In the following statements, `place.url` and `place.extract` are extracted from the function `getWikiData()`.
              * They are essentially being used to get the URL and the first paragraph of the article, respectively.
              */
@@ -209,10 +188,7 @@ const viewModel = function() {
                 largeInfoWindow.close();
             }
 
-            /**
-             * If the place is found, then show it in the list as well as on the map.
-             * Otherwise, hide it.
-             */
+            // If the place is found, then show it in the list as well as on the map. Otherwise, hide it.
             if (place.name.toLowerCase().indexOf(text) !== -1) {
                 place.marker.setVisible(true);
                 return true;
