@@ -38,7 +38,13 @@ A working demo of this application can be found over [here](https://sdey96.githu
 └── README.md
 ```
 
-In this project, the models are put in the file `model.js` located inside the `js` directory, and the file `app.js` contains the ViewModel.
+### Description of Main Files Used in this Project
+
+- `index.html` - Main file to open.
+- `main.css` - Main stylesheet.
+- `model.js` - Includes the models used in this project.
+- `config.js` - Includes API key, maps styles and configuration.
+- `app.js` - Includes the ViewModel.
 
 ## How to Run This Application?
 
