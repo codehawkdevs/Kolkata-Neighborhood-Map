@@ -68,10 +68,14 @@
     "worker"        : false,
     "wsh"           : false,
     "yui"           : false,
-    "globals"       : { "ko": true,
-                        "google": true,
-                        "$": true
+    "globals"       : { "ko"                : true,
+                        "google"            : true,
+                        "$"                 : true,
+                        "mapsConfig"        : true,
+                        "places"            : true
                       },
-    "exported"      : { "initMap": true }
+    "exported"      : { "initMap"           : true,
+                        "mapsErrorHandler"  : true
+                      }
 
 }
