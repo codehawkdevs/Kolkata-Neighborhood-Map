@@ -72,3 +72,19 @@ const styles = [{
         "lightness": "12"
     }]
 }];
+
+
+// Google Maps configuration.
+const mapsConfig = {
+    center: {
+        lat: 22.572645,
+        lng: 88.363892,
+    },
+    zoom: 12,
+    gestureHandling: "cooperative",
+    zoomControl: false,
+    fullscreenControl: false,
+    streetViewControl: false,
+    mapTypeControl: false,
+    styles: styles,
+};
