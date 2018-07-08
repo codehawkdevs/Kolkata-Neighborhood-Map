@@ -8,56 +8,33 @@
  */
 
 
+let map;
+
+
 // Google Maps Error Handling.
  function mapsErrorHandler() {
     alert("Could not load the map. Please refresh this page or try again later.");
 }
 
 
-/**
- * Get the Wikipedia article of the concerned place and handle errors (if any).
- *
- * Part of this code has been brought from Udacity's "Intro to AJAX" course.
- * Course link: https://in.udacity.com/course/intro-to-ajax--ud110
- */
+// Get the Wikipedia article of the concerned place and handle errors (if any).
 function getWikiData(place) {
-
-    // Error handling.
-    let wikiRequestTimeOut = setTimeout(() => alert("Cannot fetch data from Wikipedia at the moment. Please try again later."), 8000);
-
     let wikiUrl = `https://en.wikipedia.org/w/api.php?action=opensearch&search=${place.wikiArticle}&format=json&callback=wikiCallback`;
 
-    $.ajax({
-        url: wikiUrl,
-        dataType: "jsonp",
-        success: (response) => {
+    $.ajax({ url: wikiUrl, dataType: "jsonp" })
+        .done(response => {
             let articleList = response[1];
             let url = `https://en.wikipedia.org/wiki/${articleList[0]}`;
             place.url = url;
             place.extract = response[2];
-            clearTimeout(wikiRequestTimeOut);
-        }
-    });
+        })
+        .fail(() => alert("Cannot fetch Wikipedia data at the moment. Please try again later."));
 }
 
 
-let map;
-
 // Initialize the map.
 function initMap() {
-    map = new google.maps.Map(document.getElementById("map"), {
-        center: {
-            lat: 22.572645,
-            lng: 88.363892,
-        },
-        zoom: 12,
-        gestureHandling: "cooperative",
-        zoomControl: false,
-        fullscreenControl: false,
-        streetViewControl: false,
-        mapTypeControl: false,
-        styles: styles,     // `styles` is located in `js/config.js`.
-    });
+    map = new google.maps.Map(document.getElementById("map"), mapsConfig);      // `mapsConfig` is located in `js/config.js`.
 
     // Apply bindings to the ViewModel.
     ko.applyBindings(new viewModel());
@@ -67,14 +44,14 @@ function initMap() {
 // ViewModel
 const viewModel = function() {
 
-    // Fetch the current weather.
-    let self = this;
-    this.imagePath = ko.observable("");
-    this.temperature = ko.observable("");
-    this.weather = ko.observable("");
+    // Fetch current weather from OpenWeatherMap.
+    const self = this;
+    self.imagePath = ko.observable("");
+    self.temperature = ko.observable("");
+    self.weather = ko.observable("");
     const apiEndpoint = `https://api.openweathermap.org/data/2.5/weather?q=Kolkata,IN&appid=${owmAppId}`;
 
-    $.getJSON(apiEndpoint, (data) => {
+    $.getJSON(apiEndpoint, data => {
         self.imagePath(`https://openweathermap.org/img/w/${data.weather[0].icon}.png`);
         self.temperature(data.main.temp - 273.15);
         self.weather(data.weather[0].main);
@@ -82,7 +59,7 @@ const viewModel = function() {
 
 
     // Main functionality.
-    let largeInfoWindow = new google.maps.InfoWindow({maxWidth: 300});
+    let largeInfoWindow = new google.maps.InfoWindow({ maxWidth: 300 });
     this.places = ko.observableArray(places);       // `places` is defined inside `js/model.js`.
 
     for (let place of this.places()) {
@@ -120,12 +97,12 @@ const viewModel = function() {
 
     // Render content in the infowindow.
     this.wikiInfoWindow = (place, marker, infoWindow) => {
-        infoWindow.marker = marker;
         let jsonUrl, imageData;
+        infoWindow.marker = marker;
         jsonUrl = `https://en.wikipedia.org/w/api.php?action=query&origin=*&prop=pageimages&format=json&piprop=original&titles=${place.wikiArticle}`;
 
         // Make an asynchronous request to get featured image of the concerned article from Wikipedia.
-        $.getJSON(jsonUrl, (data) => {
+        $.getJSON(jsonUrl, data => {
 
             // Get the link to the Wikipedia article's featured image and store it in the variable `imageData`.
             for (let pageId in data.query.pages) {
@@ -138,8 +115,7 @@ const viewModel = function() {
              * In the following statements, `place.url` and `place.extract` are extracted from the function `getWikiData()`.
              * They are essentially being used to get the URL and the first paragraph of the article, respectively.
              */
-            let infoWindowContent = infoWindow.getContent();
-            infoWindowContent = `
+            infoWindow.setContent(`
                     <div class='infowindow'>
                         <h1><a target='_blank' href='${place.url}'>${marker.title}</a></h1>
                     </div>
@@ -153,17 +129,16 @@ const viewModel = function() {
                             <img src='https://png.icons8.com/windows/15/000000/wikipedia.png' alt='Wiki Logo'> Wikipedia.
                             Explore more on <a target='_blank' href='https://www.google.com/search?q=${marker.title}'>Google</a>.
                         </p>
-                    </div>`;
-            infoWindow.setContent(infoWindowContent);
+                    </div>`);
 
             // Open the infowindow on the specified marker.
             infoWindow.open(map, marker);
-        }).fail(() => alert("Cannot contact Wikipedia servers at the moment. Please try again later."));  // Error handling.
+        }).fail(() => alert("Cannot contact Wikipedia servers at the moment. Please try again later."));    // Error handling.
     };
 
 
     // Open the place marker's infowindow when a place is clicked from the list.
-    this.wikiInfo = (place) => {
+    this.wikiInfo = place => {
 
         // Render information received from Wikipedia on the infowindow.
         this.wikiInfoWindow(place, place.marker, largeInfoWindow);
@@ -181,7 +156,7 @@ const viewModel = function() {
     this.locationItem = ko.computed(() => {
         let text = this.inputLocation().toLowerCase();
 
-        return ko.utils.arrayFilter(this.places(), (place) => {
+        return ko.utils.arrayFilter(this.places(), place => {
 
             // Close any currently opened infowindow.
             if (largeInfoWindow) {
@@ -189,13 +164,9 @@ const viewModel = function() {
             }
 
             // If the place is found, then show it in the list as well as on the map. Otherwise, hide it.
-            if (place.name.toLowerCase().indexOf(text) !== -1) {
-                place.marker.setVisible(true);
-                return true;
-            } else {
-                place.marker.setVisible(false);
-                return false;
-            }
+            const match = place.name.toLowerCase().indexOf(text) !== -1;
+            place.marker.setVisible(match);
+            return match;
         });
     });
 };
